@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jamiya Pro | Full App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mobile-frame">
+        <div class="status-bar">
+            <span class="time">9:41</span>
+            <div class="icons">
+                <span class="icon-wifi">📶</span>
+                <span class="icon-batt">🔋</span>
+            </div>
+        </div>
+
+        <!-- 1. SPLASH SCREEN -->
+        <div id="page-splash" class="page active splash-bg">
+            <div class="logo-container pulse">
+                <div class="logo-icon">J</div>
+                <h1 class="logo-text">Jamiya</h1>
+            </div>
+        </div>
+
+        <!-- 2. ONBOARDING SCREEN -->
+        <div id="page-onboarding" class="page">
+            <div class="onboarding-image"></div>
+            <div class="onboarding-content">
+                <h2>Save Together,<br>Grow Together.</h2>
+                <p>The smartest and most secure way to manage financial circles (ROSCA) with your trusted network.</p>
+                <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+                <button class="btn-primary" onclick="navigate('page-login')">Get Started</button>
+            </div>
+        </div>
+
+        <!-- 3. LOGIN SCREEN -->
+        <div id="page-login" class="page">
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to continue to Jamiya.</p>
+            </div>
+            <div class="auth-form">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="tareq@example.com" id="email-input">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" id="pass-input">
+                </div>
+                <button class="btn-primary" id="btn-login" onclick="handleLogin()">Sign In</button>
+                <p class="auth-link">Don't have an account? <b>Sign up</b></p>
+            </div>
+        </div>
+
+        <!-- 4. PERMISSIONS SCREEN -->
+        <div id="page-permissions" class="page">
+            <div class="perm-icon">🔔</div>
+            <h2 class="perm-title">Enable Notifications</h2>
+            <p class="perm-desc">We need your permission to send you alerts about your upcoming payouts and pool updates.</p>
+            
+            <div class="mock-alert" id="mock-alert">
+                <h3>"Jamiya" Would Like to Send You Notifications</h3>
+                <p>Notifications may include alerts, sounds, and icon badges.</p>
+                <div class="alert-btns">
+                    <button class="alert-btn" onclick="acceptPermissions()">Don't Allow</button>
+                    <button class="alert-btn bold" onclick="acceptPermissions()">Allow</button>
+                </div>
+            </div>
+            
+            <button class="btn-primary" onclick="showPermissionAlert()">Enable Now</button>
+            <button class="btn-text" onclick="navigate('page-home')">Skip for now</button>
+        </div>
+
+        <!-- 5. HOME DASHBOARD -->
+        <div id="page-home" class="page has-nav bg-gray">
+            <div class="home-header">
+                <div class="user-info">
+                    <div class="avatar">T</div>
+                    <div>
+                        <p class="greeting">Good Morning,</p>
+                        <h3 class="name">Tareq Aboushi</h3>
+                    </div>
+                </div>
+                <div class="notif-btn">🔔<div class="badge">2</div></div>
+            </div>
+
+            <div class="balance-card">
+                <p>Total Balance</p>
+                <h1>$12,450.00</h1>
+                <div class="card-actions">
+                    <button class="card-btn">➕ Deposit</button>
+                    <button class="card-btn">➖ Withdraw</button>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>J-Score (Credit)</h3>
+                <span>Details</span>
+            </div>
+            <div class="score-card">
+                <div class="score-ring">780</div>
+                <div class="score-info">
+                    <h4>Excellent Tier</h4>
+                    <p>You have paid 12 installments on time. Keep it up!</p>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>Recent Activity</h3>
+                <span>See All</span>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="act-icon bg-blue">📥</div>
+                    <div class="act-details"><h4>Q3 Family Pool</h4><p>Payout Received</p></div>
+                    <div class="act-amount positive">+$5,000</div>
+                </div>
+                <div class="activity-item">
+                    <div class="act-icon bg-red">📤</div>
+                    <div class="act-details"><h4>Office Savings</h4><p>Installment Paid</p></div>
+                    <div class="act-amount negative">-$500</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. POOLS SCREEN -->
+        <div id="page-pools" class="page has-nav bg-gray">
+            <div class="header-simple"><h2>Active Jamiyas</h2></div>
+            <div class="pool-tabs">
+                <button class="tab active">Active (2)</button>
+                <button class="tab">Pending (1)</button>
+                <button class="tab">Completed (4)</button>
+            </div>
+            
+            <div class="pool-list">
+                <div class="pool-card" onclick="navigate('page-pool-detail')">
+                    <div class="pool-card-header">
+                        <h3>Family Savings 2026</h3>
+                        <span class="status-badge">Your Turn: Month 4</span>
+                    </div>
+                    <div class="pool-progress-bar"><div class="progress" style="width: 40%"></div></div>
+                    <div class="pool-stats">
+                        <div><p>Total Pool</p><h4>$10,000</h4></div>
+                        <div><p>Monthly</p><h4>$1,000</h4></div>
+                        <div><p>Members</p><h4>10</h4></div>
+                    </div>
+                </div>
+
+                <div class="pool-card">
+                    <div class="pool-card-header">
+                        <h3>Tech Dept Circle</h3>
+                        <span class="status-badge alert">Payment Due</span>
+                    </div>
+                    <div class="pool-progress-bar"><div class="progress" style="width: 80%"></div></div>
+                    <div class="pool-stats">
+                        <div><p>Total Pool</p><h4>$5,000</h4></div>
+                        <div><p>Monthly</p><h4>$500</h4></div>
+                        <div><p>Members</p><h4>10</h4></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="fab">➕</button>
+        </div>
+
+        <!-- 7. POOL DETAIL SCREEN -->
+        <div id="page-pool-detail" class="page bg-gray">
+            <div class="detail-header">
+                <button class="back-btn" onclick="navigate('page-pools')">← Back</button>
+                <h2>Family Savings</h2>
+            </div>
+            
+            <div class="detail-hero">
+                <p>Your Payout Date</p>
+                <h1>April 15, 2027</h1>
+                <p>Amount: <b>$10,000</b></p>
+            </div>
+
+            <div class="members-list">
+                <h3>Members & Turns</h3>
+                <div class="member-row">
+                    <div class="turn-num">1</div>
+                    <div class="member-info"><h4>Ahmed Al-Fahad</h4><p>Paid</p></div>
+                    <div class="member-status check">✓</div>
+                </div>
+                <div class="member-row active-me">
+                    <div class="turn-num">2</div>
+                    <div class="member-info"><h4>Tareq (You)</h4><p class="due">Payment Due Today</p></div>
+                    <button class="pay-btn" id="pay-installment-btn" onclick="processPayment()">Pay $1,000</button>
+                </div>
+                <div class="member-row">
+                    <div class="turn-num">3</div>
+                    <div class="member-info"><h4>Sara K.</h4><p>Pending</p></div>
+                    <div class="member-status wait">⏳</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. PROFILE SCREEN -->
+        <div id="page-profile" class="page has-nav bg-gray">
+            <div class="header-simple"><h2>Settings</h2></div>
+            
+            <div class="profile-hero">
+                <div class="avatar large">T</div>
+                <h2>Tareq Aboushi</h2>
+                <p>ID: JAM-99381-SA</p>
+            </div>
+
+            <div class="settings-group">
+                <h3>Account</h3>
+                <div class="setting-item"><span>Personal Information</span> <span>></span></div>
+                <div class="setting-item"><span>Payment Methods</span> <span>></span></div>
+            </div>
+
+            <div class="settings-group">
+                <h3>Preferences</h3>
+                <div class="setting-item">
+                    <span>Face ID / Biometrics</span>
+                    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                </div>
+                <div class="setting-item">
+                    <span>Dark Mode</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+            </div>
+
+            <button class="btn-logout" onclick="handleLogout()">Log Out</button>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <nav id="bottom-nav" class="bottom-nav hidden">
+            <div class="nav-item active" onclick="navTab('page-home', this)">
+                <span class="nav-icon">🏠</span><span class="nav-text">Home</span>
+            </div>
+            <div class="nav-item" onclick="navTab('page-pools', this)">
+                <span class="nav-icon">🔄</span><span class="nav-text">Jamiyas</span>
+            </div>
+            <div class="nav-item" onclick="navTab('page-profile', this)">
+                <span class="nav-icon">👤</span><span class="nav-text">Profile</span>
+            </div>
+        </nav>
+        
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
